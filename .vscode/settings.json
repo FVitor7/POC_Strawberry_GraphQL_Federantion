@@ -1,7 +1,0 @@
-{
-    "python.analysis.extraPaths": [
-        "./modelo_service",
-        "./modelo_service",
-        "./user_service/database"
-    ]
-}
