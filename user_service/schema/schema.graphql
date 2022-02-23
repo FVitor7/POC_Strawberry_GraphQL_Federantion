@@ -1,0 +1,25 @@
+type Mutation {
+  createUser(name: String!, email: String!, cpf: String!): User!
+}
+
+type Query {
+  _service: _Service!
+  _entities(representations: [_Any!]!): [_Entity]!
+  usersService: String!
+  users(id: Int = null, name: String = null, cpf: String = null, email: String = null): [User!]!
+}
+
+type User @key(fields: "id") {
+  id: ID!
+  name: String!
+  email: String!
+  cpf: String!
+}
+
+scalar _Any
+
+union _Entity = User
+
+type _Service {
+  sdl: String!
+}

@@ -1,0 +1,52 @@
+union AddCategoryResponse = Category | CategoryExists
+
+union AddTaskResponse = Task | TaskExists
+
+type Category {
+  id: ID!
+  categoryName: String!
+  tasks: [Task!]!
+}
+
+type CategoryExists {
+  message: String!
+}
+
+type Mutation {
+  addTask(taskName: String!, userId: Int, categoryName: String): AddTaskResponse!
+  addCategory(categoryName: String!): AddCategoryResponse!
+}
+
+type Query {
+  _service: _Service!
+  _entities(representations: [_Any!]!): [_Entity]!
+  tasksService: String!
+  tasks(id: Int = null, taskName: String = null, userId: Int = null): [Task!]!
+  categories(id: Int = null, categoryName: String = null): [Category!]!
+}
+
+type Task {
+  id: ID!
+  taskName: String!
+  userId: Int!
+  category: Category
+}
+
+type TaskExists {
+  message: String!
+}
+
+extend type User @key(fields: "id") {
+  id: ID! @external
+  name: String! @external
+  code: String! @requires(fields: "name")
+  tasks: [Task!]!
+}
+
+scalar _Any
+
+union _Entity = User
+
+type _Service {
+  sdl: String!
+}

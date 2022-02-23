@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  gateway:
+    build:
+      context: ./gateway
+    networks:
+      - microservices
+    depends_on:
+      - users
+      - tasks
+    ports:
+      - "7000:7000"
+    command: bash -c "npm run dev"
+
+  users:
+    build:
+      context: ./user_service
+    networks: 
+      - microservices
+    ports:
+      - "8000:8000"
+    command: bash -c "uvicorn app:app --port 8000 --reload"
+
+  tasks:
+    build:
+      context: ./task_service
+    networks:
+      - microservices
+    ports:
+      - "8800:8800"
+    command: bash -c "uvicorn app:app --port 8800 --reload"
+
+networks:
+  microservices:
