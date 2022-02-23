@@ -19,9 +19,9 @@ class User:
 @strawberry.federation.type(keys=["id"], extend=True)
 class Task:
     id: strawberry.ID = strawberry.federation.field(external=True)
-    name: str = strawberry.federation.field(external=True)
+    task_name: str = strawberry.federation.field(external=True)
 
-    @strawberry.federation.field(requires=["name"])
+    @strawberry.federation.field(requires=["task_name"])
     def code(self) -> str:
         return f"TaskService: {self.task_name}"
 
@@ -37,5 +37,5 @@ class Task:
 
 
     @classmethod
-    async def resolve_reference(cls, id: strawberry.ID, name: Optional[str] = None):
-        return cls(id=id, name=name)
+    async def resolve_reference(cls, id: strawberry.ID, task_name: Optional[str] = None):
+        return cls(id=id, task_name=task_name)

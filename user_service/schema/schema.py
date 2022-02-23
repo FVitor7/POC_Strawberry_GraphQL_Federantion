@@ -64,5 +64,9 @@ class Mutation:
         return User.marshal(db_user)
 
 
-schema = strawberry.federation.Schema(query=Query, mutation=Mutation)
+schema = strawberry.federation.Schema(
+    query=Query,
+    mutation=Mutation,
+    types=[User]
+    )
 graphql_app = GraphQLRouter(schema)
