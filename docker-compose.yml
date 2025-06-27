@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  users:
+    build: ./user_service
+    ports:
+      - "8000:8000"
+  tasks:
+    build: ./task_service
+    ports:
+      - "8800:8800"
+  gateway:
+    build: ./gateway
+    ports:
+      - "7000:7000"
+    depends_on:
+      - users
+      - tasks

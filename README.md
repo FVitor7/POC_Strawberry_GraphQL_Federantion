@@ -1,5 +1,7 @@
 # POC Strawberry GraphQL and FastAPI
-Foobar is a Python library for dealing with word pluralization.
+This project demonstrates a federated GraphQL setup composed of two
+FastAPI microservices and an Apollo Gateway. Each service can be run
+individually or all together using Docker.
 
 ## Installation
 
@@ -40,6 +42,17 @@ npm run-script dev
 Federation of the two microservices will be available on port 7000
 
 Access: http://localhost:7000
+
+### Running with Docker Compose
+
+To start all services at once use `docker-compose`:
+
+```bash
+docker-compose build
+docker-compose up
+```
+
+The gateway will be available on http://localhost:7000
 
 ## Generating the Schema
 
