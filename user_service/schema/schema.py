@@ -49,7 +49,7 @@ class Query:
 @strawberry.type
 class Mutation:
     @strawberry.mutation
-    async def create_user(self, name: str, email: str, cpf: str) -> User:
+    async def create_user(self, name: str, email: str, cpf: str) -> AddUserResponse:
         async with get_session() as s:
             existing_db_user = None
             sql = select(models.User).where(models.User.cpf == cpf)
