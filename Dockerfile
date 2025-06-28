@@ -13,6 +13,8 @@ COPY task_service/requirements.txt /app/task_service/requirements.txt
 COPY user_service/requirements.txt /app/user_service/requirements.txt
 RUN pip install --no-cache-dir -r task_service/requirements.txt && \
     pip install --no-cache-dir -r user_service/requirements.txt
+RUN strawberry export-schema user_service/schema/schema:schema > user_service/schema/schema.graphql
+RUN strawberry export-schema task_service/schema/schema:schema > task_service/schema/schema.graphql
 
 # Copy Node dependencies and install
 COPY gateway/package.json /app/gateway/package.json

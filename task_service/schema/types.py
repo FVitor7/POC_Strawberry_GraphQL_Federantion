@@ -51,7 +51,7 @@ class User:
 
     @strawberry.federation.field(requires=["name"])
     def code(self) -> str:
-        return f"TaskService: {self.task_name}"
+        return f"TaskService: {self.name}"
 
     @strawberry.field
     async def tasks(self) -> List[Task]:
