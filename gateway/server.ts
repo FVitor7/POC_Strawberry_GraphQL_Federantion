@@ -5,11 +5,11 @@ const gateway = new ApolloGateway({
   serviceList: [
     {
       name: "tasks",
-      url: "http://localhost:8800/graphql",
+      url: "http://tasks:8800/graphql", // <--- corrigido
     },
     {
       name: "users",
-      url: "http://localhost:8000/graphql",
+      url: "http://users:8000/graphql", // <--- corrigido
     },
   ],
   experimental_pollInterval: 2000,
@@ -21,7 +21,7 @@ const server = new ApolloServer({
 });
 
 server
-  .listen({ port: 7000 })
+  .listen({ port: 8080 })
   .then(({ url }) => {
     console.info(`🚀 Gateway available at ${url}`);
   })

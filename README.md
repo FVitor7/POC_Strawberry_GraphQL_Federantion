@@ -39,9 +39,9 @@ npm install
 npm run-script dev
 ```
 
-Federation of the two microservices will be available on port 7000
+Federation of the two microservices will be available on port 8080
 
-Access: http://localhost:7000
+Access: http://localhost:8080
 
 ### Running with Docker Compose
 
@@ -52,7 +52,7 @@ docker-compose build
 docker-compose up
 ```
 
-The gateway will be available on http://localhost:7000
+The gateway will be available on http://localhost:8080
 
 ## Generating the Schema
 
@@ -61,3 +61,77 @@ In the microservice folder run:
 strawberry export-schema schema.schema > schema/schema.graphql
 ```
 
+## Mutations
+#### createUser
+```bash
+mutation {
+  createUser(
+    cpf: "12345678900"
+    email: "fabio@example.com"
+    name: "Fábio Vitor"
+  ) {
+    id
+    name
+    email
+    cpf
+  }
+}
+```
+#### addCategory
+```bash
+mutation {
+  addCategory(categoryName: "Tecnologia") {
+    __typename
+    ... on Category {
+      id
+      categoryName
+    }
+    ... on CategoryExists {
+      message
+    }
+  }
+}
+```
+#### addCategory
+```bash
+mutation {
+  addTask(
+    categoryName: "Tecnologia"
+    taskName: "Estudar Federation"
+    userId: 1
+  ) {
+    __typename
+    ... on Task {
+      id
+      taskName
+      userId
+      category {
+        id
+        categoryName
+      }
+    }
+    ... on TaskExists {
+      message
+    }
+  }
+}
+```
+## Queries
+#### federation Example
+```bash
+query {
+  users(cpf: "12345678900") {
+    id
+    name
+    email
+    tasks {
+      id
+      taskName
+      category {
+        id
+        categoryName
+      }
+    }
+  }
+}
+```

@@ -22,7 +22,7 @@ RUN cd gateway && npm install && cd ..
 # Copy source
 COPY . /app
 
-EXPOSE 7000 8000 8800
+EXPOSE 8080 8000 8800
 
 CMD bash -c "uvicorn user_service.app:app --host 0.0.0.0 --port 8000 & \
               uvicorn task_service.app:app --host 0.0.0.0 --port 8800 & \
